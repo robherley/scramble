@@ -2,6 +2,7 @@
   "name": "to-be-named",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "bulma": "^0.6.2",
     "moment": "^2.20.1",
