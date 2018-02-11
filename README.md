@@ -25,3 +25,9 @@ We've gained experience about working with sockets (with React.js), asynchronous
 ## What's next for Scramble
 
 More mini-games, observe opponent's progress and improve performance of the site.
+
+## How to install
+* `npm i` in the top level directory to install all dependencies
+* Go into `client/`, `npm i` to install dependencies and build then react files `npm run build` 
+* Finally, go back up into the top-level server directory and `npm start`
+
