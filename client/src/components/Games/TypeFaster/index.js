@@ -23,55 +23,24 @@ export default class TypeFaster extends Component {
   }
 
   onKeyPress(e) {
-<<<<<<< Updated upstream
-    console.log(e.keyCode);
     e.preventDefault();
     const { meIndex, quote } = this.state;
 
     const inputChar = String.fromCharCode(e.keyCode);
     const currReqChar = quote.charAt(meIndex);
-    console.log(`we need this letter: ${currReqChar}`);
 
-    const isLower = this.isLower(currReqChar);
-    switch (isLower) {
-      case true:
-        console.log(inputChar);
-        if (inputChar === currReqChar.toUpperCase() && !e.shiftKey) {
-          this.setState({ meIndex: meIndex + 1 });
-          this.props.socket.emit('score');
-          console.log('incrementing myIndex');
-        } else console.log('nah1');
-        break;
-      default:
-        console.log(inputChar);
-        if (inputChar === currReqChar.toUpperCase() && e.shiftKey) {
-          this.setState({ meIndex: meIndex + 1 });
-          this.props.socket.emit('score');
-          console.log('incrementing myIndex');
-        } else console.log('nah2');
-    }
-    if (meIndex === quote.length - 1) {
-      this.props.socket.emit('score');
-      this.props.endGame();
-=======
-    e.preventDefault()
-    const {meIndex, quote} = this.state
-
-    const inputChar = String.fromCharCode(e.keyCode)
-    const currReqChar = quote.charAt(meIndex)
-
-    switch(this.isLower(currReqChar)) {
+    switch (this.isLower(currReqChar)) {
       case true:
         if (inputChar === currReqChar.toUpperCase() && !e.shiftKey)
-         this.setState({meIndex: meIndex + 1})
-        break
+          this.setState({ meIndex: meIndex + 1 });
+        this.props.socket.emit('score');
+        break;
       default:
         if (inputChar === currReqChar.toUpperCase() && e.shiftKey)
-          this.setState({meIndex: meIndex + 1})
->>>>>>> Stashed changes
+          this.setState({ meIndex: meIndex + 1 });
+        this.props.socket.emit('score');
     }
-    if (meIndex == quote.length-1) 
-     this.props.endGame()
+    if (meIndex == quote.length - 1) this.props.endGame();
   }
 
   render() {
