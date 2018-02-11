@@ -10,7 +10,7 @@ const server = app.listen(port, () =>
   console.log('🚀  Server running on Port:', port)
 );
 
-app.use(express.static('client/build/'));
+// app.use(express.static('client/build/'));
 
 const io = require('socket.io')(server);
 const game = new Game(io);
@@ -25,11 +25,13 @@ io.sockets.on('connection', socket => {
       id: socket.id,
       room: open[0].id
     });
+    socket.gameRoom = open[0].id;
     socket.emit('ready');
     socket.to(open[0].id).emit('ready');
   } else {
     // If no open games, make a new one
     const newRoom = `game-${uuid()}`;
+    socket.gameRoom = newRoom;
     socket.join(newRoom);
     socket.emit('msg', {
       id: socket.id,
@@ -37,38 +39,22 @@ io.sockets.on('connection', socket => {
     });
   }
 
-  socket.on('count', () => {
-    if (socket.count) {
-      socket.count++;
+  socket.on('score', () => {
+    if (socket.score) {
+      socket.score++;
     } else {
-      socket.count = 1;
+      socket.score = 1;
     }
-    console.log(`[${socket.id}]`, 'count is', socket.count);
+    console.log(`[${socket.id}]`, 'score is', socket.score);
+  });
+
+  socket.on('end', () => {
+    game.getScore(socket.gameRoom, socket.id);
   });
 
   socket.on('disconnecting', () => {
     console.log(c.red('Dropping Game'), Object.keys(socket.rooms)[1]);
-    socket.to(Object.keys(socket.rooms)[1]).emit('drop_partner');
+    socket.to(socket.gameRoom).emit('quit');
     console.log(c.red('Client Disconnected'), socket.id);
   });
-});
-
-app.get('/rooms', (req, res) => {
-  console.log(c.blue('Socket Game Rooms'), game.getGameRooms());
-  res.json({ rooms: game.getGameRooms() });
-});
-
-app.get('/allrooms', (req, res) => {
-  console.log(c.blue('All Socket Rooms'), game.getAllRooms());
-  res.json({ rooms: game.getAllRooms() });
-});
-
-app.get('/openrooms', (req, res) => {
-  console.log(c.blue('All Socket Rooms'), game.getOpenRooms());
-  res.json({ rooms: game.getOpenRooms() });
-});
-
-app.get('/clients', (req, res) => {
-  console.log(c.blue('Connected Sockets'), game.getClients());
-  res.json({ sent: true });
 });

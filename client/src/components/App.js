@@ -12,7 +12,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameState: 'waiting'
+      gameState: 'waiting',
+      won: null
     };
   }
 
@@ -24,13 +25,22 @@ class App extends Component {
     socket.on('ready', () => {
       this.setState({ gameState: 'ready' });
     });
-  }
-
-  componentWillUnmount() {
-    // eventually remove socket
+    socket.on('quit', () => {
+      this.setState({ gameState: 'quit' });
+    });
+    socket.on('winner', () => {
+      this.setState({ won: true });
+    });
+    socket.on('loser', () => {
+      this.setState({ won: false });
+    });
+    socket.on('tie', () => {
+      this.setState({ won: 'heck' });
+    });
   }
 
   endGame() {
+    socket.emit('end');
     this.setState({ gameState: 'end' });
   }
 
@@ -44,7 +54,9 @@ class App extends Component {
           </div>
         );
       case 'end':
-        return <EndScreen />;
+        return <EndScreen socket={socket} won={this.state.won} />;
+      case 'quit':
+        return <div>Your Partner Left</div>;
       default:
         return <div>Waiting to joint 420 🌲🔥!</div>;
     }
