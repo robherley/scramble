@@ -10,7 +10,7 @@ const server = app.listen(port, () =>
   console.log('🚀  Server running on Port:', port)
 );
 
-app.use(express.static('public/'));
+app.use(express.static('client/build/'));
 
 const io = require('socket.io')(server);
 const game = new Game(io);
