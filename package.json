@@ -9,6 +9,9 @@
   },
   "keywords": [],
   "author": "",
+  "engines": {
+    "node": "^9.4.0"
+  },
   "license": "ISC",
   "dependencies": {
     "chalk": "^2.3.0",
