@@ -5,4 +5,4 @@ import TypeFaster from './TypeFaster';
 const games = [<SpaceSpam />, <TypeFaster />];
 
 export default ({ socket, endGame, gameId, randomNum }) =>
-  React.cloneElement(games[gameId], { socket, endGame, randomNum });
+  React.cloneElement(games[1], { socket, endGame, randomNum});
