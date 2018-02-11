@@ -17,6 +17,10 @@ class App extends Component {
     };
   }
 
+  componentWillUnmount() {
+    socket.close();
+  }
+
   componentWillMount() {
     socket.on('msg', data => {
       console.log(data);
@@ -71,7 +75,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.renderScreen()}
-        <div
+        {/* <div
           style={{
             marginTop: 'auto',
             display: 'flex',
@@ -85,7 +89,7 @@ class App extends Component {
           <span>
             <b>Room:</b> {room}
           </span>
-        </div>
+        </div> */}
       </div>
     );
   }

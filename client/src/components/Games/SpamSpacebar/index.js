@@ -12,7 +12,11 @@ export default class Counter extends Component {
   spaceDown(e) {
     if (e.keyCode === 32) {
       this.props.socket.emit('score');
-      this.setState({ count: this.state.count + 1 });
+      this.setState(
+        { count: this.state.count + 1 },
+        () =>
+          (this.refs.countNum.style.fontSize = `${60 + 2 * this.state.count}px`)
+      );
     }
   }
 
@@ -27,7 +31,9 @@ export default class Counter extends Component {
               this.spaceDown(e);
             }}
           />
-          <h1>{this.state.count}</h1>
+          <h1 ref="countNum" className="count">
+            {this.state.count}
+          </h1>
         </div>
       </div>
     );

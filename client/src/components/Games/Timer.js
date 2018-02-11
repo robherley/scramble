@@ -5,7 +5,7 @@ export default class Timer extends Component {
     super(props);
     this.timer = 0;
     this.state = {
-      seconds: 200
+      seconds: 15
     };
   }
 
@@ -28,6 +28,6 @@ export default class Timer extends Component {
   }
 
   render() {
-    return <h1>{this.state.seconds}s</h1>;
+    return <h1 className="timer">{this.state.seconds}s</h1>;
   }
 }

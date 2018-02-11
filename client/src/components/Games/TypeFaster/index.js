@@ -93,7 +93,6 @@ export default class TypeFaster extends Component {
       <div className="type-faster">
         <h1>TypeFaster!</h1>
         <h2>Type faster than your opponent!</h2>
-        <br />
         <Quote quote={quote} meIndex={meIndex} oppIndex={oppIndex} />
         <EventListener
           target="window"

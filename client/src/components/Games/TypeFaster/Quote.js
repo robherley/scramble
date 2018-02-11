@@ -3,12 +3,15 @@ import React from 'react';
 const Quote = ({ quote, meIndex, oppIndex }) => {
   return (
     <div>
-      <table>
+      <table style={{ fontSize: '2em' }}>
         <tbody>
           <tr>
             {quote.split('').map((char, index) => {
               let style = {};
-              if (index < meIndex) style.textDecoration = 'underline';
+              if (index < meIndex) {
+                style.textDecoration = 'underline';
+                style.color = 'var(--green)';
+              }
               if (index < oppIndex) style.backgroundColor = 'yellow';
 
               if (char === ' ')
