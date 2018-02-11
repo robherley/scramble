@@ -5,7 +5,7 @@ export default class Timer extends Component {
     super(props)
     this.timer = 0
     this.state = {
-      seconds: 60
+      seconds: 10
     }
   }
 
@@ -20,7 +20,11 @@ export default class Timer extends Component {
   countDown() {
     let seconds = this.state.seconds - 1;
     this.setState({seconds: seconds});
-    if (seconds === 0) clearInterval(this.timer);
+    if (seconds === 0) {
+      clearInterval(this.timer);
+      console.log("ending game...")
+      this.props.endGame()
+    }
   }
 
   render() {
