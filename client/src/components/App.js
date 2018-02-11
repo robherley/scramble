@@ -35,7 +35,7 @@ class App extends Component {
       this.setState({ gameState: 'end', won: false });
     });
     socket.on('tie', () => {
-      this.setState({ won: 'heck' });
+      this.setState({ gameState: 'end', won: 'heck' });
     });
   }
 

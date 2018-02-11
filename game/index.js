@@ -29,13 +29,13 @@ class Game {
     return Object.keys(this._io.sockets.clients().connected);
   }
 
-  getScore(gameid, client) {
+  getScore(gameid) {
     const players = Object.keys(this.getAllRooms()[gameid].sockets).map(
       e => this._io.sockets.clients().connected[e]
     );
     console.log(players[0].score || 0, 'vs', players[1].score || 0);
     if (players[0].score === players[1].score) {
-      this._io.to(client).emit('tie');
+      this._io.to(gameid).emit('tie');
     } else {
       if ((players[0].score || 0) > (players[1].score || 0)) {
         this._io.to(players[0].id).emit('winner');
