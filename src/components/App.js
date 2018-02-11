@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
 import '../style/App.css';
+import Navbar from './Navbar'
+import Body from './Body'
+import Space from './Games/SpamSpacebar'
+import Timer from './Games/Timer'
+
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      playerName: 'Unknown Player',
+      page: ''
+    }
+  }
+
+  renderNav() {
+    if (this.state.page === 'landing') {
+      return <Navbar playerName={this.state.playerName} page={this.state.page} />
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {this.renderNav()}
+        <Body>
+          {/* <Space /> */}
+          <Timer />
+        </Body>
       </div>
     );
   }
