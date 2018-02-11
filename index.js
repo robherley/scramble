@@ -10,7 +10,7 @@ const server = app.listen(port, () =>
   console.log('🚀  Server running on Port:', port)
 );
 
-// app.use(express.static('client/build/'));
+app.use(express.static('client/build/'));
 
 const io = require('socket.io')(server);
 const game = new Game(io);
@@ -26,8 +26,16 @@ io.sockets.on('connection', socket => {
       room: open[0].id
     });
     socket.gameRoom = open[0].id;
-    socket.emit('ready');
-    socket.to(open[0].id).emit('ready');
+    const gameId = Math.floor(Math.random() * 2);
+    const randomNum = Math.floor(Math.random() * 2);
+    socket.emit('ready', {
+      gameId,
+      randomNum
+    });
+    socket.to(open[0].id).emit('ready', {
+      gameId,
+      randomNum
+    });
   } else {
     // If no open games, make a new one
     const newRoom = `game-${uuid()}`;

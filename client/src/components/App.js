@@ -22,8 +22,8 @@ class App extends Component {
       console.log(data);
       this.setState({ ...data });
     });
-    socket.on('ready', () => {
-      this.setState({ gameState: 'ready' });
+    socket.on('ready', data => {
+      this.setState({ gameState: 'ready', ...data });
     });
     socket.on('quit', () => {
       this.setState({ gameState: 'quit' });
@@ -49,7 +49,12 @@ class App extends Component {
       case 'ready':
         return (
           <div className="game">
-            <Game socket={socket} endGame={() => this.endGame()} />
+            <Game
+              socket={socket}
+              gameId={this.state.gameId}
+              endGame={() => this.endGame()}
+              randomNum={this.state.randomNum}
+            />
             <Timer endGame={() => this.endGame()} />
           </div>
         );
