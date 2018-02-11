@@ -29,10 +29,10 @@ class App extends Component {
       this.setState({ gameState: 'quit' });
     });
     socket.on('winner', () => {
-      this.setState({ won: true });
+      this.setState({ gameState: 'end', won: true });
     });
     socket.on('loser', () => {
-      this.setState({ won: false });
+      this.setState({ gameState: 'end', won: false });
     });
     socket.on('tie', () => {
       this.setState({ won: 'heck' });
@@ -41,7 +41,7 @@ class App extends Component {
 
   endGame() {
     socket.emit('end');
-    this.setState({ gameState: 'end' });
+    // this.setState({ gameState: 'end' });
   }
 
   renderScreen() {

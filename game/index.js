@@ -33,16 +33,16 @@ class Game {
     const players = Object.keys(this.getAllRooms()[gameid].sockets).map(
       e => this._io.sockets.clients().connected[e]
     );
-    console.log(players[0].score, 'vs', players[1].score);
+    console.log(players[0].score || 0, 'vs', players[1].score || 0);
     if (players[0].score === players[1].score) {
       this._io.to(client).emit('tie');
     } else {
-      const winner =
-        players[0].score > players[1].score ? players[0].id : players[1].id;
-      if (winner === client) {
-        this._io.to(client).emit('winner');
+      if ((players[0].score || 0) > (players[1].score || 0)) {
+        this._io.to(players[0].id).emit('winner');
+        this._io.to(players[1].id).emit('loser');
       } else {
-        this._io.to(client).emit('loser');
+        this._io.to(players[1].id).emit('winner');
+        this._io.to(players[0].id).emit('loser');
       }
     }
   }

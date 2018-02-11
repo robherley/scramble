@@ -1,16 +1,16 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 
 export default class Timer extends Component {
   constructor(props) {
-    super(props)
-    this.timer = 0
+    super(props);
+    this.timer = 0;
     this.state = {
-      seconds: 200
-    }
+      seconds: 10
+    };
   }
 
   componentDidMount() {
-    this.startTimer()
+    this.startTimer();
   }
 
   startTimer() {
@@ -19,17 +19,15 @@ export default class Timer extends Component {
 
   countDown() {
     let seconds = this.state.seconds - 1;
-    this.setState({seconds: seconds});
+    this.setState({ seconds: seconds });
     if (seconds === 0) {
       clearInterval(this.timer);
-      console.log("ending game...")
-      this.props.endGame()
+      console.log('ending game...');
+      this.props.endGame();
     }
   }
 
   render() {
-    return (
-      <h1>{this.state.seconds}s</h1>
-    )
+    return <h1>{this.state.seconds}s</h1>;
   }
 }
