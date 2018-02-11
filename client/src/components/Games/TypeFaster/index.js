@@ -23,7 +23,7 @@ export default class TypeFaster extends Component {
       ',': 188,
       '<': 188,
       '-': 173,
-      '_': 173,
+      _: 173,
       '.': 190,
       '>': 190,
       '/': 191,
@@ -36,10 +36,10 @@ export default class TypeFaster extends Component {
       '|': 220,
       ']': 221,
       '}': 221,
-      '\'': 222,
+      "'": 222,
       '"': 222
-    }
-    return keyCodes[char]
+    };
+    return keyCodes[char];
   }
 
   componentDidMount() {
@@ -51,42 +51,40 @@ export default class TypeFaster extends Component {
   }
 
   onKeyPress(e) {
-    e.preventDefault()
-    const {meIndex, quote} = this.state
+    e.preventDefault();
+    const { meIndex, quote } = this.state;
 
-    const inputChar = String.fromCharCode(e.keyCode)
-    const currReqChar = quote.charAt(meIndex)
+    const inputChar = String.fromCharCode(e.keyCode);
+    const currReqChar = quote.charAt(meIndex);
 
-    console.log(`we need ${currReqChar}`)
-    console.log(e.keyCode)
-    console.log(inputChar)
-    if (e.keyCode === 8) {
-      e.preventDefault()
+    console.log(`we need ${currReqChar}`);
+    console.log(e.keyCode);
+    console.log(inputChar);
+    if (e.keyCode === 8 || e.keyCode === 222) {
+      e.preventDefault();
     }
 
     if ((e.keyCode >= 65 && e.keyCode <= 90) || e.keyCode === 32) {
-      switch(this.isLower(currReqChar)) {
+      switch (this.isLower(currReqChar)) {
         case true:
           if (inputChar === currReqChar.toUpperCase() && !e.shiftKey)
-            this.setState({meIndex: meIndex + 1})
+            this.setState({ meIndex: meIndex + 1 });
           this.props.socket.emit('score');
-          break
+          break;
         default:
           if (inputChar === currReqChar.toUpperCase() && e.shiftKey)
-            this.setState({meIndex: meIndex + 1})
+            this.setState({ meIndex: meIndex + 1 });
           this.props.socket.emit('score');
       }
-    }
-    else {
-      console.log('special char!')
-      const reqKeyCode = this.specialKey(currReqChar)
+    } else {
+      console.log('special char!');
+      const reqKeyCode = this.specialKey(currReqChar);
       if (reqKeyCode === e.keyCode) {
-        this.setState({meIndex: meIndex + 1})
-      this.props.socket.emit('score');
+        this.setState({ meIndex: meIndex + 1 });
+        this.props.socket.emit('score');
       }
     }
-    if (meIndex === quote.length-1) 
-     this.props.endGame()
+    if (meIndex === quote.length - 1) this.props.endGame();
   }
 
   render() {

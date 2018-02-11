@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class EndScreen extends Component {
+class End extends Component {
   componentWillUnmount() {
     this.props.socket.close();
   }
@@ -21,4 +21,4 @@ class EndScreen extends Component {
   }
 }
 
-export default EndScreen;
+export default End;

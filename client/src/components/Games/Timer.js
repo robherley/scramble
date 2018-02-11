@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProgressBar from 'react-progress-bar-plus';
 
 export default class Timer extends Component {
   constructor(props) {
@@ -29,11 +28,6 @@ export default class Timer extends Component {
   }
 
   render() {
-    return (
-      <h1>
-        <ProgressBar percent={(10 - this.state.seconds) / 10 * 100} />
-        {this.state.seconds}s
-      </h1>
-    );
+    return <h1>{this.state.seconds}s</h1>;
   }
 }

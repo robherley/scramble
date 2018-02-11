@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../style/App.css';
-// import Navbar from './Navbar';
-import Body from './Body';
 import Timer from './Games/Timer';
 import Game from './Games';
-import EndScreen from './EndScreen';
+import Quit from './Screens/Quit';
+import Waiting from './Screens/Waiting';
+import End from './Screens/End';
 import openSocket from 'socket.io-client';
 const socket = openSocket();
 
@@ -41,7 +41,6 @@ class App extends Component {
 
   endGame() {
     socket.emit('end');
-    // this.setState({ gameState: 'end' });
   }
 
   renderScreen() {
@@ -59,11 +58,11 @@ class App extends Component {
           </div>
         );
       case 'end':
-        return <EndScreen socket={socket} won={this.state.won} />;
+        return <End socket={socket} won={this.state.won} />;
       case 'quit':
-        return <div>Your Partner Left</div>;
+        return <Quit />;
       default:
-        return <div>Waiting to joint 420 🌲🔥!</div>;
+        return <Waiting />;
     }
   }
 
@@ -71,7 +70,15 @@ class App extends Component {
     const { id, room } = this.state;
     return (
       <div className="App">
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        {this.renderScreen()}
+        <div
+          style={{
+            marginTop: 'auto',
+            display: 'flex',
+            justifyContent: 'space-around',
+            width: '100%'
+          }}
+        >
           <span>
             <b>ID:</b> {id}
           </span>
@@ -79,7 +86,6 @@ class App extends Component {
             <b>Room:</b> {room}
           </span>
         </div>
-        <Body>{this.renderScreen()}</Body>
       </div>
     );
   }
