@@ -11,6 +11,7 @@ export default class Counter extends Component {
   }
 
   spaceDown(e) {
+    e.preventDefault()
     if (e.keyCode === 32) {
       this.setState({count: this.state.count+1})
     }
