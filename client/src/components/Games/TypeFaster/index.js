@@ -23,6 +23,7 @@ export default class TypeFaster extends Component {
   }
 
   onKeyPress(e) {
+<<<<<<< Updated upstream
     console.log(e.keyCode);
     e.preventDefault();
     const { meIndex, quote } = this.state;
@@ -52,7 +53,25 @@ export default class TypeFaster extends Component {
     if (meIndex === quote.length - 1) {
       this.props.socket.emit('score');
       this.props.endGame();
+=======
+    e.preventDefault()
+    const {meIndex, quote} = this.state
+
+    const inputChar = String.fromCharCode(e.keyCode)
+    const currReqChar = quote.charAt(meIndex)
+
+    switch(this.isLower(currReqChar)) {
+      case true:
+        if (inputChar === currReqChar.toUpperCase() && !e.shiftKey)
+         this.setState({meIndex: meIndex + 1})
+        break
+      default:
+        if (inputChar === currReqChar.toUpperCase() && e.shiftKey)
+          this.setState({meIndex: meIndex + 1})
+>>>>>>> Stashed changes
     }
+    if (meIndex == quote.length-1) 
+     this.props.endGame()
   }
 
   render() {
