@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   renderScreen() {
-    switch (this.state.gameRunning) {
+    switch (this.state.gameState) {
       case 'ready':
         return (
           <div className="game">
