@@ -10,10 +10,7 @@ const socket = openSocket();
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playerName: 'Unknown Player',
-      page: ''
-    };
+    this.state = {};
   }
 
   componentWillMount() {
@@ -29,11 +26,16 @@ class App extends Component {
     const { id, room } = this.state;
     return (
       <div className="App">
-        <div>
-          ID: {id} Room: {room}
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <span>
+            <b>ID:</b> {id}
+          </span>
+          <span>
+            <b>Room:</b> {room}
+          </span>
         </div>
         <Body>
-          <Game />
+          <Game socket={socket} />
           <Timer />
         </Body>
       </div>

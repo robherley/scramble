@@ -37,6 +37,15 @@ io.sockets.on('connection', socket => {
     });
   }
 
+  socket.on('count', () => {
+    if (socket[count]) {
+      socket[count]++;
+    } else {
+      socket[count] = 1;
+    }
+    console.log('Count is', socket[count]);
+  });
+
   socket.on('disconnecting', () => {
     console.log(c.red('Dropping Game'), Object.keys(socket.rooms)[1]);
     socket.to(Object.keys(socket.rooms)[1]).emit('drop_partner');
