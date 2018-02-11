@@ -14,7 +14,7 @@ export default class Game extends Component {
   componentDidMount() {
     this.setState({
       // gameId: Math.floor(Math.random() * this.state.games.length)
-      gameId: 0
+      gameId: 1
     });
   }
 
