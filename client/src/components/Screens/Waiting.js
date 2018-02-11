@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   position: relative;
   align-self: flex-start;
   margin-bottom: 140px;
-  margin-left: 15.5em;
+  margin-left: 12.5em;
   .ball {
     background: var(--purple);
     border-radius: 50%;
@@ -60,7 +60,8 @@ class Waiting extends Component {
           <div className="ball" />
           <div className="ball" />
         </Wrapper>
-        <h1>Waiting for an opponent!</h1>
+        <h2>Waiting for an opponent!</h2>
+        <h1>Welcome to Scramble</h1>
       </Flex>
     );
   }
