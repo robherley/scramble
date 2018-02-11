@@ -28,6 +28,23 @@ class Game {
     // All connected clients
     return Object.keys(this._io.sockets.clients().connected);
   }
+
+  getScore(gameid, client) {
+    const players = Object.keys(this.getAllRooms()[gameid].sockets).map(
+      e => this._io.sockets.clients().connected[e]
+    );
+    if (players[0].count === players[1].count) {
+      this._io.to(client).emit('tie');
+    } else {
+      const winner =
+        players[0].count > players[1].count ? players[0].id : players[1].id;
+      if (winner === client) {
+        this._io.to(client).emit('winner');
+      } else {
+        this._io.to(client).emit('loser');
+      }
+    }
+  }
 }
 
 module.exports = Game;

@@ -12,7 +12,7 @@ export default class Counter extends Component {
   spaceDown(e) {
     if (e.keyCode === 32) {
       this.props.socket.emit('count');
-      this.setState({ count: ++this.state.count });
+      this.setState({ count: this.state.count + 1 });
     }
   }
 
