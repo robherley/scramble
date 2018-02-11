@@ -33,6 +33,7 @@ class Game {
     const players = Object.keys(this.getAllRooms()[gameid].sockets).map(
       e => this._io.sockets.clients().connected[e]
     );
+    console.log(players[0].score, 'vs', players[1].score);
     if (players[0].score === players[1].score) {
       this._io.to(client).emit('tie');
     } else {

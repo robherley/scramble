@@ -50,7 +50,6 @@ io.sockets.on('connection', socket => {
 
   socket.on('end', () => {
     game.getScore(socket.gameRoom, socket.id);
-    socket.score = undefined;
   });
 
   socket.on('disconnecting', () => {

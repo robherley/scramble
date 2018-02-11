@@ -39,17 +39,12 @@ class App extends Component {
     });
   }
 
-  componentWillUnmount() {
-    // maybe remove socket
-  }
-
   endGame() {
     socket.emit('end');
     this.setState({ gameState: 'end' });
   }
 
   renderScreen() {
-    console.log('won', this.state.won);
     switch (this.state.gameState) {
       case 'ready':
         return (
@@ -59,7 +54,7 @@ class App extends Component {
           </div>
         );
       case 'end':
-        return <EndScreen won={this.state.won} />;
+        return <EndScreen socket={socket} won={this.state.won} />;
       case 'quit':
         return <div>Your Partner Left</div>;
       default:
