@@ -27,7 +27,7 @@ io.sockets.on('connection', socket => {
     });
     socket.gameRoom = open[0].id;
     const gameId = Math.floor(Math.random() * 2);
-    const randomNum = Math.floor(Math.random() * 2);
+    const randomNum = Math.floor(Math.random() * 8);
     socket.emit('ready', {
       gameId,
       randomNum

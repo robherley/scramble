@@ -37,6 +37,7 @@ export default class TypeFaster extends Component {
         console.log(inputChar);
         if (inputChar === currReqChar.toUpperCase() && !e.shiftKey) {
           this.setState({ meIndex: meIndex + 1 });
+          this.props.socket.emit('score');
           console.log('incrementing myIndex');
         } else console.log('nah1');
         break;
@@ -44,6 +45,7 @@ export default class TypeFaster extends Component {
         console.log(inputChar);
         if (inputChar === currReqChar.toUpperCase() && e.shiftKey) {
           this.setState({ meIndex: meIndex + 1 });
+          this.props.socket.emit('score');
           console.log('incrementing myIndex');
         } else console.log('nah2');
     }
