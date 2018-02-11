@@ -50,13 +50,8 @@ export default class TypeFaster extends Component {
         else console.log('nah2')
     }
     if (meIndex == quote.length-1) {
-      this.endGame()
+      this.props.endGame()
     }
-  }
-
-  endGame() {
-    //socket emits "end game" here
-    console.log('end game!!')
   }
 
   render() {

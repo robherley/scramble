@@ -49,7 +49,7 @@ class App extends Component {
       case 'ready':
         return (
           <div className="game">
-            <Game socket={socket} />
+            <Game socket={socket} endGame={() => this.endGame()} />
             <Timer endGame={() => this.endGame()} />
           </div>
         );

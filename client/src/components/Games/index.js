@@ -20,7 +20,7 @@ export default class Game extends Component {
 
   render() {
     const { games, gameId } = this.state;
-    const { socket } = this.props;
-    return <div>{React.cloneElement(games[gameId], { socket })}</div>;
+    const { socket, endGame } = this.props;
+    return <div>{React.cloneElement(games[gameId], { socket, endGame })}</div>;
   }
 }
