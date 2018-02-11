@@ -39,17 +39,18 @@ io.sockets.on('connection', socket => {
     });
   }
 
-  socket.on('count', () => {
-    if (socket.count) {
-      socket.count++;
+  socket.on('score', () => {
+    if (socket.score) {
+      socket.score++;
     } else {
-      socket.count = 1;
+      socket.score = 1;
     }
-    console.log(`[${socket.id}]`, 'count is', socket.count);
+    console.log(`[${socket.id}]`, 'score is', socket.score);
   });
 
   socket.on('end', () => {
     game.getScore(socket.gameRoom, socket.id);
+    socket.score = undefined;
   });
 
   socket.on('disconnecting', () => {
