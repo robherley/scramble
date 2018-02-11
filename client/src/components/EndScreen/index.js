@@ -7,16 +7,15 @@ class EndScreen extends Component {
 
   render() {
     const { won } = this.props;
-    if (won === 'heck') {
-      return (
-        <div>
-          <h1>You tied!!!</h1>
-        </div>
-      );
-    }
     return (
       <div>
-        <h1>You {won ? 'won!' : 'lost!'}</h1>
+        {won === 'heck' ? (
+          <h1>You tied!!!</h1>
+        ) : (
+          <h1>You {won ? 'won!' : 'lost!'}</h1>
+        )}
+        <br />
+        <button onClick={() => window.location.reload()}>Play Again!</button>
       </div>
     );
   }
