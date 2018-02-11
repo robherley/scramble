@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../style/App.css';
 import Navbar from './Navbar'
 import Body from './Body'
-import Space from './Games/SpamSpacebar'
 import Timer from './Games/Timer'
+import Game from './Games'
 
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
       <div className="App">
         {this.renderNav()}
         <Body>
-          {/* <Space /> */}
+          <Game />
           <Timer />
         </Body>
       </div>
