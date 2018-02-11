@@ -11,7 +11,9 @@ const socket = openSocket();
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      gameState: 'waiting'
+    };
   }
 
   componentWillMount() {
@@ -19,28 +21,33 @@ class App extends Component {
       console.log(data);
       this.setState({ ...data });
     });
-  }
-
-  componentWillUnmount() {}
-
-  endGame() {
-    this.setState({ gameRunning: !this.state.gameRunning }, () => {
-      console.log(this.state.gameRunning);
+    socket.on('ready', () => {
+      this.setState({ gameState: 'ready' });
     });
   }
 
+  componentWillUnmount() {
+    // eventually remove socket
+  }
+
+  endGame() {
+    this.setState({ gameState: 'end' });
+  }
+
   renderScreen() {
-    console.log('running renderScreen');
-    if (this.state.gameRunning) {
-      return (
-        <div className="game">
-          <Game />
-          <Timer endGame={() => this.endGame()} />
-        </div>
-      );
+    switch (this.state.gameRunning) {
+      case 'ready':
+        return (
+          <div className="game">
+            <Game socket={socket} />
+            <Timer endGame={() => this.endGame()} />
+          </div>
+        );
+      case 'end':
+        return <EndScreen />;
+      default:
+        return <div>Waiting to joint 420 🌲🔥!</div>;
     }
-    console.log('ending screen');
-    return <EndScreen />;
   }
 
   render() {

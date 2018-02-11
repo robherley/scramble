@@ -13,12 +13,14 @@ export default class Game extends Component {
 
   componentDidMount() {
     this.setState({
-      gameId: Math.floor(Math.random() * this.state.games.length)
+      // gameId: Math.floor(Math.random() * this.state.games.length)
+      gameId: 0
     });
   }
 
   render() {
     const { games, gameId } = this.state;
-    return <div>{games[gameId]}</div>;
+    const { socket } = this.props;
+    return <div>{React.cloneElement(games[gameId], { socket })}</div>;
   }
 }

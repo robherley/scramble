@@ -27,6 +27,7 @@ io.sockets.on('connection', socket => {
     });
     socket.emit('ready');
     socket.to(open[0].id).emit('ready');
+    console.log('Game', open[0].id, 'is ready!');
   } else {
     // If no open games, make a new one
     const newRoom = `game-${uuid()}`;
@@ -38,12 +39,12 @@ io.sockets.on('connection', socket => {
   }
 
   socket.on('count', () => {
-    if (socket[count]) {
-      socket[count]++;
+    if (socket.count) {
+      socket.count++;
     } else {
-      socket[count] = 1;
+      socket.count = 1;
     }
-    console.log('Count is', socket[count]);
+    console.log('Count is', socket.count);
   });
 
   socket.on('disconnecting', () => {
